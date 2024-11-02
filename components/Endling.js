@@ -31,10 +31,10 @@ const Endling = () => {
           {/* Animated Button */}
           <div className="flex items-end py-5">
             <Button
-              href="/about"
+              href="/contact"
               svgIcon={<MyArrowIcon />}
-              textOne="LEARN MORE"
-              textTwo="LEARN MORE"
+              textOne="SCHEDULE A CALL"
+              textTwo="SCHEDULE A CALL"
               wrapperBgColor="bg-sec-clr" // Background color for .btn-wrapper
               linkTextColor="font-[500] text-pri-clr font-PP-NEUE" // Text color for .btn-link-wrapper span
               svgWrapperBgColor="bg-pri-clr" // Background color for .btn-svg-wrapper
