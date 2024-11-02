@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { db } from '../firebaseConfig'; // import the Firestore database
-import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -16,21 +16,26 @@ export default function ContactForm() {
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
 
+  // Ye function form ke input ko update kar raha hai
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Form submit hone par data ko Firebase Firestore mein save kar raha hai
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Add a new document to the Firestore collection
-      await addDoc(collection(db, "contacts"), formData);
+      // Yahan pe data ke saath timestamp bhi add kar rahe hain
+      await addDoc(collection(db, "contacts"), {
+        ...formData,
+        timestamp: Timestamp.now() // Ye current timestamp ko save kar raha hai
+      });
 
       setPopupMessage("Form submitted successfully!");
       setPopupVisible(true);
 
-      // Clear form data after submission
+      // Form clear karna after submission
       setFormData({
         name: '',
         email: '',
@@ -42,7 +47,7 @@ export default function ContactForm() {
         preferredLocation: '',
       });
 
-      // Hide the success message after 2 seconds
+      // 2 seconds baad success message hata dena
       setTimeout(() => setPopupVisible(false), 2000);
     } catch (error) {
       setPopupMessage("An error occurred. Please try again.");
