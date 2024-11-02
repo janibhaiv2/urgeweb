@@ -36,18 +36,7 @@ const Terms_Conditions = () => {
             />
         </div>
 
-<div className='py-3 mt-8'>
-<MaskText
-              text="Refund Policy:"
-              className="text-pri-clr uppercase font-pp-neue text-3xl md:text-5xl lg:text-6xl xl:text-7xl"
-            />
-        </div>
-<div className='py-3'>
-              <MaskText
-              text="The customer agree that they will not liable to be claim a refund in cases of he/she wish to end of their agreement with services and withdraw from before the time of URGE OF IMMIGRATION VISA submitting the clients Immigration and or Visa application. The customer confirms that before making any purchase that he/she read and understands all our terms and conditions. The client may cancel/withhold the application at various stages of the process without claiming any refund from the company even if it is the very next day after signing the contract. The COMPANY will not refund the amount once the agreement is signed as all the information and process details was explained in good faith and have given accurate details as per the existing rules and regulations of the respective country to file their application. Clients also agrees that they would be responsible on misrepresentation or fraud information on the application package The CLIENT having failed the medical; The CLIENT having a criminal record; The CLIENT not being proficient in the English language; The CLIENT unable to provide relevant documents as per requirement (depending on the countries and the program you applied for) Or any changes in criteria or whatsoever changes in corporate by the respective There won’t be any refund even in the event of Client being informed by the respective Immigration Office that he/she does not qualify for required program applied with URGE OF IMMIGRATION VISA other than and the one’s explained here: Medical, Security, Misrepresentation, Insufficient information, Insufficient funds, point lost on language or Misleading information, Point lost on education because of non-accredited, unrecognized or false credential, Points lost on work experience where in the case officer was not satisfied with the evidence furnished by the applicant, non-submission of complete/required documents from client’s side within stipulated time changes introduced by the relevant Government office which may retroactively affect the client’s case, non-cooperation from client’s or client’s dependents side and any other violation of contractual clause. If a refund is issued, it is only made on special consideration which is against URGE OF IMMIGRATION VISA terms & conditions, however the refund application will be processed in 90 working days at the sole discretion of URGE OF IMMIGRATION VISA legal team. For complete information and all the relevant clauses kindly refer to the retainer agreement signed by both the parties"
-              className="text-pri-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
-            />
-        </div>
+
         </div>
 
 
