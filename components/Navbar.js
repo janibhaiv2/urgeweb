@@ -182,7 +182,7 @@ const Navbar = () => {
                 <Link href="/" className="text-5xl" onClick={toggleMobileMenu}>
                   HOME
                 </Link>
-                <Link href="/About" className="text-5xl" onClick={toggleMobileMenu}>
+                <Link href="/about" className="text-5xl" onClick={toggleMobileMenu}>
                   ABOUT
                 </Link>
 
