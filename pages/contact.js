@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import { db } from '../firebaseConfig';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import Button from '../components/Button'; 
+import MyArrowIcon from '../components/MyArrowIcon'; 
+import { MaskText } from '../components/maskText/MaskText';
+import Endling from '../components/Endling';
+import SmoothScroll from '../components/SmoothScroll';
+import FaqList from '../components/FaqList';
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -16,26 +24,22 @@ export default function ContactForm() {
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
 
-  // Ye function form ke input ko update kar raha hai
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Form submit hone par data ko Firebase Firestore mein save kar raha hai
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Yahan pe data ke saath timestamp bhi add kar rahe hain
       await addDoc(collection(db, "contacts"), {
         ...formData,
-        timestamp: Timestamp.now() // Ye current timestamp ko save kar raha hai
+        timestamp: Timestamp.now()
       });
 
       setPopupMessage("Form submitted successfully!");
       setPopupVisible(true);
 
-      // Form clear karna after submission
       setFormData({
         name: '',
         email: '',
@@ -47,7 +51,6 @@ export default function ContactForm() {
         preferredLocation: '',
       });
 
-      // 2 seconds baad success message hata dena
       setTimeout(() => setPopupVisible(false), 2000);
     } catch (error) {
       setPopupMessage("An error occurred. Please try again.");
@@ -57,92 +60,108 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <form onSubmit={handleSubmit} className="w-full max-w-lg p-8 bg-white shadow-md rounded-lg">
-        <h2 className="text-2xl font-bold mb-6 text-center">Contact Us</h2>
+    <SmoothScroll>
+      <Navbar />
+      <div className="flex items-center justify-center w-screen">
+        <form onSubmit={handleSubmit} className="w-full bg-pri-clr py-10 px-5">
+          <div className="py-10">
+            <MaskText 
+              text="LET'S TALK"
+              className="text-sec-clr uppercase font-pp-neue text-3xl md:text-5xl lg:text-6xl xl:text-7xl"/>
+          </div>
 
-        <label>Name:</label>
-        <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+          <label><MaskText text="NAME*" className="text-sec-clr font-lauanne text-1xl" /></label>
+          <input type="text" name="name" value={formData.name} onChange={handleChange} required className="w-full px-4 py-2 mb-4 rounded font-lauanne bg-pri-light-clr text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent" />
 
-        <label>Email:</label>
-        <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+          <label><MaskText text="EMAIL*" className="text-sec-clr font-lauanne text-1xl" /></label>
+          <input type="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-2 mb-4 rounded font-lauanne bg-pri-light-clr text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent" />
 
-        <label>Phone Number:</label>
-        <input type="text" name="phone" value={formData.phone} onChange={handleChange} required />
+          <label><MaskText text="PHONE NUMBER*" className="text-sec-clr font-lauanne text-1xl" /></label>
+          <input type="text" name="phone" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-2 mb-4 rounded font-lauanne bg-pri-light-clr text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent" />
 
-        <label>Migrate Country:</label>
-        <select name="migrateCountry" value={formData.migrateCountry} onChange={handleChange} required>
-          <option value="">Select Country</option>
-          <option value="USA">USA</option>
-          <option value="Canada">Canada</option>
-          <option value="Australia">Australia</option>
-          <option value="UK">UK</option>
-          <option value="Germany">Germany</option>
-        </select>
+          <label><MaskText text="Migrate Country*" className="text-sec-clr uppercase font-lauanne text-1xl" /></label>
+          <select name="migrateCountry" value={formData.migrateCountry} onChange={handleChange} required className="w-full flex items-center justify-center px-4 py-3 mb-4 rounded font-lauanne uppercase bg-pri-light-clr text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent">
+            <option value="">Select Country</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <option value="Australia">Australia</option>
+            <option value="UK">UK</option>
+            <option value="Germany">Germany</option>
+          </select>
 
-        <label>Age Range:</label>
-        <select name="ageRange" value={formData.ageRange} onChange={handleChange} required>
-          <option value="">Select Age Range</option>
-          <option value="18-25">18-25</option>
-          <option value="26-35">26-35</option>
-          <option value="36-45">36-45</option>
-          <option value="46-55">46-55</option>
-          <option value="56+">56+</option>
-        </select>
+          <label><MaskText text="Age Range*" className="text-sec-clr uppercase font-lauanne text-1xl" /></label>
+          <select name="ageRange" value={formData.ageRange} onChange={handleChange} required className="w-full flex items-center justify-center px-4 py-3 mb-4 rounded font-lauanne uppercase bg-pri-light-clr text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent">
+            <option value="">Select Age Range</option>
+            <option value="18-25">18-25</option>
+            <option value="26-35">26-35</option>
+            <option value="36-45">36-45</option>
+            <option value="46-55">46-55</option>
+            <option value="56+">56+</option>
+          </select>
 
-        <label>Education:</label>
-        <select name="education" value={formData.education} onChange={handleChange} required>
-          <option value="">Select Education</option>
-          <option value="High school">High school</option>
-          <option value="Bachelor's Degree">Bachelor's Degree</option>
-          <option value="Master's Degree">Master's Degree</option>
-          <option value="PhD">PhD</option>
-          <option value="Others">Others</option>
-        </select>
+          <label><MaskText text="Education*" className="text-sec-clr uppercase font-lauanne text-1xl" /></label>
+          <select name="education" value={formData.education} onChange={handleChange} required className="w-full flex items-center justify-center px-4 py-3 mb-4 rounded font-lauanne uppercase bg-pri-light-clr text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent">
+            <option value="">Select Education</option>
+            <option value="High school">High school</option>
+            <option value="Bachelor's Degree">Bachelor's Degree</option>
+            <option value="Master's Degree">Master's Degree</option>
+            <option value="PhD">PhD</option>
+            <option value="Others">Others</option>
+          </select>
 
-        <label>Immigration Type:</label>
-        <select name="immigrationType" value={formData.immigrationType} onChange={handleChange} required>
-          <option value="">Select Immigration Type</option>
-          <option value="Canada skilled immigration">Canada skilled immigration</option>
-          <option value="Australia skilled immigration">Australia skilled immigration</option>
-          <option value="Visit Visa">Visit Visa</option>
-          <option value="Work Permit">Work Permit</option>
-        </select>
+          <label><MaskText text="Immigration Type*" className="text-sec-clr uppercase font-lauanne text-1xl" /></label>
+          <select name="immigrationType" value={formData.immigrationType} onChange={handleChange} required className="w-full flex items-center justify-center px-4 py-3 mb-4 rounded font-lauanne uppercase bg-pri-light-clr text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent">
+            <option value="">Select Immigration Type</option>
+            <option value="Canada skilled immigration">Canada skilled immigration</option>
+            <option value="Australia skilled immigration">Australia skilled immigration</option>
+            <option value="Visit Visa">Visit Visa</option>
+            <option value="Work Permit">Work Permit</option>
+          </select>
 
-        <label>Preferred Location:</label>
-        <select name="preferredLocation" value={formData.preferredLocation} onChange={handleChange} required>
-          <option value="">Select Location</option>
-          <option value="Dubai (SZR)">Dubai (SZR)</option>
-          <option value="Abu Dhabi">Abu Dhabi</option>
-          <option value="Sharjah">Sharjah</option>
-        </select>
+          <label><MaskText text="Preferred Location*" className="text-sec-clr uppercase font-lauanne text-1xl" /></label>
+          <select name="preferredLocation" value={formData.preferredLocation} onChange={handleChange} required className="w-full flex items-center justify-center px-4 py-3 mb-4 rounded font-lauanne uppercase bg-pri-light-clr text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent">
+            <option value="">Select Location</option>
+            <option value="Dubai (SZR)">Dubai (SZR)</option>
+            <option value="Abu Dhabi">Abu Dhabi</option>
+            <option value="Sharjah">Sharjah</option>
+          </select>
 
-        <button type="submit">Submit</button>
+          <div className="mt-6">
+            <Button
+              href="#"
+              svgIcon={<MyArrowIcon />}
+              textOne="SUBMIT"
+              textTwo="SUBMIT"
+              wrapperBgColor="bg-sec-clr"
+              linkTextColor="font-[500] text-pri-clr font-pp-neue"
+              svgWrapperBgColor="bg-pri-clr"
+            />
+          </div>
 
-        {popupVisible && (
-          <div className="popup">{popupMessage}</div>
-        )}
-      </form>
+          {popupVisible && (
+            <div className="popup font-pp-neue">{popupMessage}</div>
+          )}
+        </form>
 
-      <style jsx>{`
-        form {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-        }
-        .popup {
-          position: fixed;
-          bottom: 10%;
-          left: 50%;
-          transform: translateX(-50%);
-          background: #4caf50;
-          color: white;
-          padding: 1rem;
-          border-radius: 0.5rem;
-          opacity: ${popupVisible ? 1 : 0};
-          transition: opacity 0.5s ease;
-        }
-      `}</style>
-    </div>
+        <style jsx>{`
+          .popup {
+            position: fixed;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4caf50;
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'font-pp-neue', sans-serif;
+            opacity: ${popupVisible ? 1 : 0};
+            transition: opacity 0.5s ease;
+          }
+        `}</style>
+      </div>
+      <Endling />
+      <FaqList />
+      <Footer />
+    </SmoothScroll>
   );
 }
