@@ -1,4 +1,4 @@
-
+import Head from 'next/head';
 import ImageGallery from "../components/about-sec/ImageGallery";
 import Paragraph from "../components/about-sec/Paragraph";
 import WhyChooseUs from "../components/about-sec/WhyChooseUs";
@@ -11,20 +11,22 @@ import SmoothScroll from "../components/SmoothScroll";
 
 export default function About() {
   return (
-  <Page>
+    <Page>
+      <Head>
+        <title>About Us | URGE OF IMMIGRATION - Your Trusted Visa Consultancy</title>
+        <meta name="description" content="Learn more about URGE OF IMMIGRATION, our mission, and why thousands trust us for their visa and immigration needs. We are committed to guiding you on your global journey." />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
 
-    <SmoothScroll>
-      <Navbar />
-      <ImageGallery/>
-      <Paragraph/>
-      <WhyChooseUs/>
-      <Endling/>
-      <FaqList/>
-      <Footer/>
-
-    </SmoothScroll>
-  </Page>
-
-    
+      <SmoothScroll>
+        <Navbar />
+        <ImageGallery />
+        <Paragraph />
+        <WhyChooseUs />
+        <Endling />
+        <FaqList />
+        <Footer />
+      </SmoothScroll>
+    </Page>
   );
 }

@@ -63,7 +63,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="w-full fixed top-0 left-0 z-[100000] bg-transparent flex items-center justify-center font-pp-neue">
+    <div className="w-full fixed top-0 left-0 z-[10000] bg-transparent flex items-center justify-center font-pp-neue">
       <div className="w-[95%] h-12 px-6 flex items-center justify-between bg-sec-clr rounded-[0.5rem] mt-4">
         <Link scroll={false} href="/" className="z-[100000000000] pr-16">
           <Logo className="h-8 w-auto" />
@@ -143,7 +143,7 @@ const Navbar = () => {
         <div className="hidden md:block text-right">
           <div className="h-full flex items-end py-5 whitespace-nowrap justify-end">
           <Button
-        href="https://google.com"
+        href="https://business.mamopay.com/pay/urgeofimmigrationvis-1c73a8"
         svgIcon={<PaymentIcon />}
         textOne="INSTANT PAYMENT"
         textTwo="INSTANT PAYMENT"
@@ -205,32 +205,41 @@ const Navbar = () => {
                         transition={{ duration: 0.3 }}
                         style={{ overflow: "hidden" }}
                       >
-                        <Link href="/programs/program1" className="text-4xl text-[#3d3d3d]" onClick={toggleMobileMenu}>
-                          Program 1
+                        <Link href="/USA" className="text-4xl text-[#3d3d3d]" onClick={toggleMobileMenu}>
+                        USA
                         </Link>
-                        <Link href="/programs/program2" className="text-4xl text-[#3d3d3d]" onClick={toggleMobileMenu}>
-                          Program 2
+                        <Link href="/Canada" className="text-4xl text-[#3d3d3d]" onClick={toggleMobileMenu}>
+                          CANADA
                         </Link>
-                        <Link href="/programs/program3" className="text-4xl text-[#3d3d3d]" onClick={toggleMobileMenu}>
-                          Program 3
+                        <Link href="/Australia" className="text-4xl text-[#3d3d3d]" onClick={toggleMobileMenu}>
+                          AUSTRALIA
+                        </Link>
+                        <Link href="/UK" className="text-4xl text-[#3d3d3d]" onClick={toggleMobileMenu}>
+                          UK
+                        </Link>
+                        <Link href="/Europe" className="text-4xl text-[#3d3d3d]" onClick={toggleMobileMenu}>
+                          EUROPE
                         </Link>
                       </motion.div>
                     )}
                   </AnimatePresence>
                 </div>
 
-                <Link href="/Contact" className="text-5xl" onClick={toggleMobileMenu}>
+                <Link href="/contact" className="text-5xl" onClick={toggleMobileMenu}>
                   CONTACT
                 </Link>
 
                 <div className="h-full flex items-end py-5">
-                  <AnimatedButton
-                    className="text-4xl uppercase bg-pri-clr text-sec-clr px-10 py-4 rounded-md"
-                    text="INSTANT PAYMENT"
-                    href="/contact"
-                    Icon={PaymentIcon}
-                    iconClassName="w-8 h-8 text-white"
-                  />
+                <Button
+        href="https://business.mamopay.com/pay/urgeofimmigrationvis-1c73a8"
+        svgIcon={<PaymentIcon />}
+        textOne="INSTANT PAYMENT"
+        textTwo="INSTANT PAYMENT"
+        iconClassName="w-6 h-6 text-red-500" // SVG icon styling
+        wrapperBgColor="bg-pri-clr"         // Background color for .btn-wrapper
+        linkTextColor="text-sec-clr"      // Text color for .btn-link-wrapper span
+        svgWrapperBgColor="bg-sec-clr"       // Background color for .btn-svg-wrapper
+      />
                 </div>
               </motion.div>
             </motion.div>

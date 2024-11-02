@@ -13,7 +13,7 @@ const Endling = () => {
         <div className="w-full h-full  opacity-80 md:absolute">
           <div className="mainimage w-[25rem] h-[30rem] overflow-hidden static md:absolute top-1/2 left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2">
             <ParallaxImage
-              src="./images/Ending.jpg" // Replace with the actual image path
+              src="./images/Ending.webp" // Replace with the actual image path
               alt="Visa Experts"
               duration={2} // Control the duration of the animation
             />

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MaskText } from "./maskText/MaskText";
 
 // Register ScrollTrigger with GSAP
 if (typeof window !== "undefined") {
@@ -117,10 +118,14 @@ const Testimonials = () => {
 
   return (
     <div className="jolo min-h-auto bg-pri-clr w-screen flex justify-center items-center flex-col py-10">
-      <div className="w-full overflow-hidden mb-10">
-        <h1 className="text-pri-light-clr font-pp-neue text-6xl px-8 uppercase leading-tight mb-4 md:text-8xl" style={{ lineHeight: "100%" }}>
-          What Our <br /> Clients Say?
-        </h1>
+      <div className="w-full overflow-hidden mb-10 px-5">
+      
+        <MaskText
+            text="What Our"
+            className="text-pri-light-clr font-pp-neue text-4xl uppercase leading-[90%] md:text-8xl"/>
+        <MaskText
+            text="Clients Say?"
+            className="text-pri-light-clr font-pp-neue text-4xl uppercase leading-[90%] mb-4 md:text-8xl"/>
         
         {/* Drag container */}
         <motion.div

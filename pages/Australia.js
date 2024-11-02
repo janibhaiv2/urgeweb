@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import WaveScene from '../components/AUSTRALIAFlag';
 import SmoothScroll from '../components/SmoothScroll';
 import Navbar from '../components/Navbar';
@@ -27,8 +28,15 @@ const AnimatedLine = ({ index }) => {
   );
 };
 
-const usaVisaPrograms = () => {
+const AustraliaVisaPrograms  = () => {
   return (
+    <>
+     <Head>
+        <title>Australia Visa Programs | URGE OF IMMIGRATION</title>
+        <meta name="description" content="Explore various visa options for Australia including Subclass 189, 190, 489, and more with URGE OF IMMIGRATION. Discover your pathway to Australia." />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
+
     <div>
       <SmoothScroll>
         <Navbar />
@@ -443,7 +451,9 @@ const usaVisaPrograms = () => {
 <Footer/>
       </SmoothScroll>
     </div>
+  </>
+
   );
 };
 
-export default usaVisaPrograms;
+export default AustraliaVisaPrograms ;

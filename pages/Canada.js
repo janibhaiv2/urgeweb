@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import WaveScene from '../components/CANADAFlag';
 import SmoothScroll from '../components/SmoothScroll';
 import Navbar from '../components/Navbar';
@@ -27,8 +28,19 @@ const AnimatedLine = ({ index }) => {
   );
 };
 
-const usaVisaPrograms = () => {
+const CanadaVisaPrograms = () => {
   return (
+    <>
+     <Head>
+        <title>Canada Visa Programs | URGE OF IMMIGRATION</title>
+        <meta name="description" content="Explore various visa options for Canada with URGE OF IMMIGRATION. Learn about AIPP, SINP, Express Entry, and other pathways to Canadian residency." />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        {/* Favicon */}
+        <link rel="icon" href="/LOGO.svg" />
+      </Head>
+
+
     <div>
       <SmoothScroll>
         <Navbar />
@@ -443,7 +455,8 @@ const usaVisaPrograms = () => {
 <Footer/>
       </SmoothScroll>
     </div>
+    </>
   );
 };
 
-export default usaVisaPrograms;
+export default CanadaVisaPrograms;

@@ -6,26 +6,22 @@ import TextReveal from "../components/TextReveal";
 import Button from "../components/Button";
 import AirplanIcon from "../components/AirplanIcon";
 import MyArrowIcon from "../components/MyArrowIcon";
+import { MaskText } from "./maskText/MaskText";
 
 const ServicesSection = () => {
   return (
-    <div className="bg-pri-clr w-screen h-full py-10 px-8 flex items-start justify-center flex-col relative rounded-t-2xl">
+    <div className="bg-pri-clr w-screen h-full py-10 px-5 flex items-start justify-center flex-col relative rounded-t-2xl">
       <div>
-        <h1
-          className="text-pri-light-clr font-pp-neue text-6xl uppercase leading-tight mb-4 md:text-8xl"
-          style={{ lineHeight: "100%" }}
-        >
-          OUR SERVICES
-        </h1>
+        <MaskText
+            text="OUR SERVICES"
+            className="text-pri-light-clr font-pp-neue text-4xl uppercase leading-[90%] mb-4 md:text-8xl"/>
       </div>
       <div
-        className="text-sec-clr font-[100] font-lauanne text-sm sm:text-md md:text-1xl lg:text-2xl xl:text-2xl 2xl:text-3xl mt-3"
-        style={{ lineHeight: "100%" }}
       >
-        <TextReveal
-          text="We provide a comprehensive range of visa consulting services tailored to your unique needs. Whether you're looking to study, work, or settle abroad, our expert team ensures a smooth and stress-free experience. We guide you through every step of the visa process, from document preparation to final approval."
-          tag="div"
-        />
+         <MaskText
+            text="We provide a comprehensive range of visa consulting services tailored to your unique needs. Whether you're looking to study, work, or settle abroad, our expert team ensures a smooth and stress-free experience. We guide you through every step of the visa process, from document preparation to final approval."
+            className="text-sec-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+          />
       </div>
 
       <div className="w-full flex flex-col lg:flex-row justify-center items-end sm:mt-14 lg:mt-40">
@@ -34,18 +30,38 @@ const ServicesSection = () => {
             className="text-sec-clr font-[100] font-lauanne text-sm sm:text-md md:text-1xl lg:text-2xl xl:text-2xl 2xl:text-3xl mt-3 tracking-tight"
             style={{ lineHeight: "100%" }}
           >
-            <TextReveal
-              text="No matter your destination or goal, we’ve got you covered with expert guidance."
-              tag="div"
-            />
+         
+            <MaskText
+            text="No matter your destination or goal, we’ve got you covered with expert guidance."
+            className="text-sec-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+          />
           </div>
 
           <div className="flex items-start justify-center flex-col text-sec-clr font-[100] font-lauanne text-sm sm:text-md md:text-1xl lg:text-2xl xl:text-2xl 2xl:text-3xl mt-3">
-            <TextReveal text="• Study Abroad" tag="div" />
-            <TextReveal text="• Work Permits" tag="div" />
-            <TextReveal text="• Family Visas" tag="div" />
-            <TextReveal text="• Business Visas" tag="div" />
-            <TextReveal text="• Tourist Visas" tag="div" />
+            <MaskText
+            text="• Study Abroad"
+            className="text-sec-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+          />
+            <MaskText
+            text="• Work Permits"
+            className="text-sec-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+          />
+
+            <MaskText
+            text="• Family Visas"
+            className="text-sec-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+          />
+
+            <MaskText
+            text="• Business Visas"
+            className="text-sec-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+          />
+
+            <MaskText
+            text="• Tourist Visas"
+            className="text-sec-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+          />
+            
           </div>
 
           <div className="h-full flex items-end py-5">

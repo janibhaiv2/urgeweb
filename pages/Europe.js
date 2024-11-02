@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import WaveScene from '../components/EUROPEFlag';
 import SmoothScroll from '../components/SmoothScroll';
 import Navbar from '../components/Navbar';
@@ -27,8 +28,14 @@ const AnimatedLine = ({ index }) => {
   );
 };
 
-const usaVisaPrograms = () => {
+const EuropeVisaPrograms = () => {
   return (
+    <>
+      <Head>
+        <title>Europe Visa Programs | URGE OF IMMIGRATION</title>
+        <meta name="description" content="Discover visa options for Europe with URGE OF IMMIGRATION. Learn about Finland's Startup Visa, Germany's Blue Card, Portugal's Golden Visa, and more." />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
     <div>
       <SmoothScroll>
         <Navbar />
@@ -638,7 +645,9 @@ const usaVisaPrograms = () => {
 <Footer/>
       </SmoothScroll>
     </div>
+    </>
+
   );
 };
 
-export default usaVisaPrograms;
+export default EuropeVisaPrograms;

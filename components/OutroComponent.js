@@ -26,7 +26,7 @@ const OutroComponent = () => {
         {/* Image with Parallax Effect */}
         <div className="bg-slate-500 w-[25rem] h-[30rem] overflow-hidden">
         <ParallaxImage
-            src="./images/outro.jpg" // Replace with the actual image path
+            src="./images/outro.webp" // Replace with the actual image path
             alt="Visa Experts"
             duration={2} // Control the duration of the animation
           />

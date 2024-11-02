@@ -19,7 +19,7 @@ const Paragraph = () => {
       </div>
       <div className="w-full h-60 sm:w-full sm:h-80 md:w-[28rem] md:h-[28rem] lg:w-[38rem] lg:h-[38rem] opacity-80 mt-10 md:mt-0">
         <ParallaxImage
-          src="./images/About.jpg" // Replace with the actual image path
+          src="./images/About.webp" // Replace with the actual image path
           alt="Visa Experts"
           duration={2} // Control the duration of the animation
         />

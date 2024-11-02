@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import WaveScene from '../components/USAFlag';
 import SmoothScroll from '../components/SmoothScroll';
 import Navbar from '../components/Navbar';
@@ -29,6 +30,15 @@ const AnimatedLine = ({ index }) => {
 
 const usaVisaPrograms = () => {
   return (
+    <>
+      <Head>
+        <title>USA Visa Programs | URGE OF IMMIGRATION</title>
+        <meta name="description" content="Discover various USA visa options with URGE OF IMMIGRATION, including the L1 Visa, EB-5 Immigrant Investor Program, E-2 Investor Visa, and more." />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        {/* Favicon */}
+        <link rel="icon" href="/LOGO.svg" />
+      </Head>
     <div>
       <SmoothScroll>
         <Navbar />
@@ -235,6 +245,8 @@ const usaVisaPrograms = () => {
 <Footer/>
       </SmoothScroll>
     </div>
+    </>
+
   );
 };
 

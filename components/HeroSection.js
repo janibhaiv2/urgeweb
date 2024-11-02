@@ -18,7 +18,7 @@ const HeroSection = () => {
       {/* Video Container */}
       <div className="video-container absolute top-0 left-0 w-full h-full overflow-hidden">
         <video
-          src="/videos/home.mp4"  // Ensure the path to the video is correct
+          src="/videos/homeVid.mp4"  // Ensure the path to the video is correct
           className="w-full h-full object-cover opacity-50"
           autoPlay
           loop

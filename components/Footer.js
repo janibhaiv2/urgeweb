@@ -17,14 +17,14 @@ function Footer() {
           <div className="uppercase font-pp-neue text-sec-clr text-1xl flex items-start justify-center ">
             <TextReveal
               linkText="PRIVACY POLICY"
-              linkHref="/more-info"
+              linkHref="/Privacy&Policy"
               tag="div"
             />
           </div>
           <div className="uppercase font-pp-neue text-sec-clr text-1xl flex items-start justify-center ">
             <TextReveal
               linkText="TERMS & CONDITIONS"
-              linkHref="/more-info"
+              linkHref="/Terms&Conditions"
               tag="div"
             />
           </div>
@@ -54,31 +54,17 @@ function Footer() {
           <div className="uppercase font-pp-neue text-sec-clr text-1xl flex items-start justify-center space-x-2 pt-2">
   {/* Facebook with hover color */}
   <div className="hover:text-[#1877F2] transition-colors duration-300">
-    <TextReveal linkHref="https://facebook.com" iconName="facebook"
+    <TextReveal linkHref="https://www.facebook.com/people/Urge-Of-Immigration-Visa-Services/61561331173529/" iconName="facebook"
              duration={1}
                     delay={0.1}
                      yAxis="150%" />
   </div>
 
-  {/* Twitter with hover color */}
-  <div className="hover:text-[#1DA1F2] transition-colors duration-300">
-    <TextReveal linkHref="https://twitter.com" iconName="twitter"
-             duration={1.1}
-                    delay={0.1}
-                     yAxis="150%" />
-  </div>
-
-  {/* LinkedIn with hover color */}
-  <div className="hover:text-[#0077B5] transition-colors duration-300">
-    <TextReveal linkHref="https://linkedin.com" iconName="linkedin"
-             duration={1.2}
-                    delay={0.1}
-                     yAxis="150%" />
-  </div>
+ 
 
   {/* Instagram with hover color */}
   <div className="hover:text-[#E4405F] transition-colors duration-300">
-    <TextReveal linkHref="https://instagram.com" iconName="instagram"
+    <TextReveal linkHref="https://www.instagram.com/urgeofimmigration_visa/" iconName="instagram"
              duration={1.3}
                     delay={0.1}
                      yAxis="150%" />

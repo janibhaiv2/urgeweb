@@ -2,6 +2,7 @@
 'use client'
 import { useState } from "react";
 import FaqItem from "./FaqItem";
+import { MaskText } from "./maskText/MaskText";
 
 const faqData = [
     {
@@ -55,7 +56,9 @@ const FaqList = () => {
 
   return (
     <div className="w-screen h-auto bg-sec-clr py-10">
-      <h2 className="text-pri-clr font-pp-neue text-6xl px-8 uppercase leading-tight mb-4 md:text-8xl">FAQs</h2>
+      <MaskText 
+              text="FAQs"
+              className="text-pri-clr px-5 uppercase font-pp-neue text-3xl md:text-5xl lg:text-6xl xl:text-7xl"/>
       {faqData.map((faq, index) => (
         <FaqItem
           key={index}

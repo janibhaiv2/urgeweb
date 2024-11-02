@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import WaveScene from '../components/UKFlag';
 import SmoothScroll from '../components/SmoothScroll';
 import Navbar from '../components/Navbar';
@@ -27,8 +28,19 @@ const AnimatedLine = ({ index }) => {
   );
 };
 
-const usaVisaPrograms = () => {
+const UKVisaPrograms  = () => {
   return (
+
+    <>
+       <Head>
+        <title>UK Visa Programs | URGE OF IMMIGRATION</title>
+        <meta name="description" content="Discover visa options for the United Kingdom with URGE OF IMMIGRATION. Learn about the UK Innovator Visa, Sole Representative Visa, Startup Visa, and more." />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        {/* Favicon */}
+        <link rel="icon" href="/LOGO.svg" />
+      </Head>
+
     <div>
       <SmoothScroll>
         <Navbar />
@@ -295,7 +307,9 @@ const usaVisaPrograms = () => {
 <Footer/>
       </SmoothScroll>
     </div>
+    </>
+
   );
 };
 
-export default usaVisaPrograms;
+export default UKVisaPrograms ;
