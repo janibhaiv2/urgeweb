@@ -1,15 +1,15 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import { db } from '../firebaseConfig';
-import { collection, addDoc, Timestamp } from 'firebase/firestore';
-import Button from '../components/Button'; 
-import MyArrowIcon from '../components/MyArrowIcon'; 
+import { supabase } from '../lib/supabaseClient';
+import Button from '../components/Button';
+import MyArrowIcon from '../components/MyArrowIcon';
 import { MaskText } from '../components/maskText/MaskText';
 import Endling from '../components/Endling';
 import SmoothScroll from '../components/SmoothScroll';
 import FaqList from '../components/FaqList';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import PhoneInput from '../components/PhoneInput';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -17,10 +17,9 @@ export default function ContactForm() {
     email: '',
     phone: '',
     migrateCountry: '',
-    ageRange: '',
+    age: '',
     education: '',
     immigrationType: '',
-    preferredLocation: '',
   });
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
@@ -32,11 +31,44 @@ export default function ContactForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validate age is at least 20
+    if (parseInt(formData.age) < 20) {
+      setPopupMessage("Age must be at least 20 years.");
+      setPopupVisible(true);
+      setTimeout(() => setPopupVisible(false), 2000);
+      return;
+    }
+
+    // Validate phone number has country code and proper format
+    if (!formData.phone.startsWith('+') || formData.phone.length < 8) {
+      setPopupMessage("Please enter a valid phone number with country code");
+      setPopupVisible(true);
+      setTimeout(() => setPopupVisible(false), 2000);
+      return;
+    }
+
     try {
-      await addDoc(collection(db, "contacts"), {
-        ...formData,
-        timestamp: Timestamp.now()
-      });
+      // Format data for Supabase with proper column names
+      const submissionData = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        // Use quoted column names for camelCase properties
+        "migrateCountry": formData.migrateCountry,
+        "age": formData.age,
+        education: formData.education,
+        "immigrationType": formData.immigrationType,
+        created_at: new Date().toISOString()
+      };
+
+      console.log('Submitting data:', submissionData);
+
+      // Insert data into Supabase
+      const { error } = await supabase
+        .from('contacts')
+        .insert([submissionData]);
+
+      if (error) throw error;
 
       setPopupMessage("Form submitted successfully!");
       setPopupVisible(true);
@@ -46,14 +78,14 @@ export default function ContactForm() {
         email: '',
         phone: '',
         migrateCountry: '',
-        ageRange: '',
+        age: '',
         education: '',
         immigrationType: '',
-        preferredLocation: '',
       });
 
       setTimeout(() => setPopupVisible(false), 2000);
     } catch (error) {
+      console.error('Submission error:', error);
       setPopupMessage("An error occurred. Please try again.");
       setPopupVisible(true);
       setTimeout(() => setPopupVisible(false), 2000);
@@ -69,14 +101,14 @@ export default function ContactForm() {
       </Head>
 
     <SmoothScroll>
-      
+
       <Navbar />
       <div className='w-screen h-10 bg-pri-clr'>
       </div>
       <div className="flex items-center justify-center w-screen">
         <form onSubmit={handleSubmit} className="w-full bg-pri-clr py-10 px-5">
           <div className="py-10">
-            <MaskText 
+            <MaskText
               text="LET'S TALK"
               className="text-sec-clr uppercase font-pp-neue text-3xl md:text-5xl lg:text-6xl xl:text-7xl"/>
           </div>
@@ -87,12 +119,15 @@ export default function ContactForm() {
           <label><MaskText text="EMAIL*" className="text-sec-clr font-lauanne text-1xl" /></label>
           <input type="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-2 mb-4 rounded font-lauanne bg-[#1d1d1d] text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent" />
 
-          <label><MaskText text="PHONE NUMBER*" className="text-sec-clr font-lauanne text-1xl" /></label>
-          <input type="text" name="phone" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-2 mb-4 rounded font-lauanne bg-[#1d1d1d] text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent" />
+          <PhoneInput
+            value={formData.phone}
+            onChange={handleChange}
+            required
+          />
 
           <label><MaskText text="Migrate Country*" className="text-sec-clr uppercase font-lauanne text-1xl" /></label>
           <select name="migrateCountry" value={formData.migrateCountry} onChange={handleChange} required className="w-full flex items-center justify-center px-4 py-3 mb-4 rounded font-lauanne uppercase bg-[#1d1d1d] text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent">
-            <option value="">Select Country</option>
+            <option value="" disabled>Select Country</option>
             <option value="USA">USA</option>
             <option value="Canada">Canada</option>
             <option value="Australia">Australia</option>
@@ -100,19 +135,20 @@ export default function ContactForm() {
             <option value="Germany">Germany</option>
           </select>
 
-          <label><MaskText text="Age Range*" className="text-sec-clr uppercase font-lauanne text-1xl" /></label>
-          <select name="ageRange" value={formData.ageRange} onChange={handleChange} required className="w-full flex items-center justify-center px-4 py-3 mb-4 rounded font-lauanne uppercase bg-[#1d1d1d] text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent">
-            <option value="">Select Age Range</option>
-            <option value="18-25">18-25</option>
-            <option value="26-35">26-35</option>
-            <option value="36-45">36-45</option>
-            <option value="46-55">46-55</option>
-            <option value="56+">56+</option>
-          </select>
+          <label><MaskText text="Age* (Minimum 20 years)" className="text-sec-clr uppercase font-lauanne text-1xl" /></label>
+          <input
+            type="number"
+            name="age"
+            value={formData.age}
+            onChange={handleChange}
+            min="20"
+            required
+            className="w-full px-4 py-2 mb-4 rounded font-lauanne bg-[#1d1d1d] text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent"
+          />
 
           <label><MaskText text="Education*" className="text-sec-clr uppercase font-lauanne text-1xl" /></label>
           <select name="education" value={formData.education} onChange={handleChange} required className="w-full flex items-center justify-center px-4 py-3 mb-4 rounded font-lauanne uppercase bg-[#1d1d1d] text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent">
-            <option value="">Select Education</option>
+            <option value="" disabled>Select Education</option>
             <option value="High school">High school</option>
             <option value="Bachelor's Degree">Bachelor's Degree</option>
             <option value="Master's Degree">Master's Degree</option>
@@ -122,20 +158,14 @@ export default function ContactForm() {
 
           <label><MaskText text="Immigration Type*" className="text-sec-clr uppercase font-lauanne text-1xl" /></label>
           <select name="immigrationType" value={formData.immigrationType} onChange={handleChange} required className="w-full flex items-center justify-center px-4 py-3 mb-4 rounded font-lauanne uppercase bg-[#1d1d1d] text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent">
-            <option value="">Select Immigration Type</option>
+            <option value="" disabled>Select Immigration Type</option>
             <option value="Canada skilled immigration">Canada skilled immigration</option>
             <option value="Australia skilled immigration">Australia skilled immigration</option>
             <option value="Visit Visa">Visit Visa</option>
             <option value="Work Permit">Work Permit</option>
           </select>
 
-          <label><MaskText text="Preferred Location*" className="text-sec-clr uppercase font-lauanne text-1xl" /></label>
-          <select name="preferredLocation" value={formData.preferredLocation} onChange={handleChange} required className="w-full flex items-center justify-center px-4 py-3 mb-4 rounded font-lauanne uppercase bg-[#1d1d1d] text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent">
-            <option value="">Select Location</option>
-            <option value="Dubai (SZR)">Dubai (SZR)</option>
-            <option value="Abu Dhabi">Abu Dhabi</option>
-            <option value="Sharjah">Sharjah</option>
-          </select>
+
 
           <div className="mt-6">
             <Button
@@ -160,14 +190,17 @@ export default function ContactForm() {
             bottom: 10%;
             left: 50%;
             transform: translateX(-50%);
-            background: #7cee6d;
+            background: ${popupMessage.includes("error") || popupMessage.includes("must") ? "#ee6d6d" : "#7cee6d"};
             color: white;
             padding: 1rem;
             border-radius: 0.5rem;
             font-family: 'font-pp-neue', sans-serif;
             opacity: ${popupVisible ? 1 : 0};
             transition: opacity 0.5s ease;
-            z-index:10000000000
+            z-index: 10000000000;
+            text-align: center;
+            min-width: 250px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
           }
         `}</style>
       </div>
