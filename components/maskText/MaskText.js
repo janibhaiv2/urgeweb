@@ -55,7 +55,7 @@ export function MaskText({ text = "", className = "" }) {
   };
 
   return (
-    <div ref={ref} className="overflow-hidden">
+    <div ref={ref} className="overflow-hidden" style={{ position: 'relative', zIndex: 2 }}>
       {lines.map((line, index) => (
         <div key={index} className="overflow-hidden">
           <motion.p

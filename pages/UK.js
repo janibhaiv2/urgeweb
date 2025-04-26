@@ -63,6 +63,53 @@ const UKVisaPrograms  = () => {
 
         <div className='h-auto w-screen bg-pri-clr py-10 px-5'>
         <div className='mb-3'> <MaskText 
+              text="UK COS PROGRAM"
+              className="text-sec-clr uppercase font-pp-neue text-3xl md:text-5xl lg:text-6xl xl:text-7xl"/></div>
+        <div className='py-3'>
+        <MaskText
+              text="Description"
+              className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+              <MaskText
+              text="The Certificate of Sponsorship (CoS) is an essential document issued by licensed UK employers to foreign workers, enabling them to apply for a work visa under the Skilled Worker route. It confirms the job offer and details of employment in the UK"
+              className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+        </div>
+        <div className='py-3'>
+        <MaskText
+              text="Eligibility"
+              className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+              <MaskText
+              text="Must have a confirmed job offer from a UK employer who holds a valid sponsor licence, and meet the role-specific skill, salary, and language requirements"
+              className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+        </div>
+        <div className='py-3' >
+        <MaskText
+              text="BENEFITS"
+              className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+              <MaskText
+              text="Enables individuals to work legally in the UK, gain valuable international experience, and provides a potential pathway towards permanent residency"
+              className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+        </div>
+        <div className='py-3' >
+        <MaskText
+              text="DURATION"
+              className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+              <MaskText
+              text="Valid typically for up to 5 years, depending on the employment contract, with the possibility to extend or apply for settlement (Indefinite Leave to Remain)"
+              className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+        </div>
+
+        </div>
+
+        <div className='h-auto w-screen bg-pri-clr py-10 px-5'>
+        <div className='mb-3'> <MaskText 
               text="UK INNOVATOR VISA"
               className="text-sec-clr uppercase font-pp-neue text-3xl md:text-5xl lg:text-6xl xl:text-7xl"/></div>
         <div className='py-3'>

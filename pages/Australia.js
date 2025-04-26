@@ -351,7 +351,7 @@ const AustraliaVisaPrograms  = () => {
 
         <div className='h-auto w-screen bg-pri-clr py-10 px-5'>
         <div className='mb-3'> <MaskText 
-              text="AUTRALIA WORK VISA"
+              text="AUSTRALIA WORK VISA"
               className="text-sec-clr uppercase font-pp-neue text-3xl md:text-5xl lg:text-6xl xl:text-7xl"/></div>
         <div className='py-3'>
         <MaskText
@@ -399,52 +399,6 @@ const AustraliaVisaPrograms  = () => {
         <AnimatedLine index={6} />
 
      
-        <div className='h-auto w-screen bg-pri-clr py-10 px-5'>
-        <div className='mb-3'> <MaskText 
-              text="YCP PROGRAM"
-              className="text-sec-clr uppercase font-pp-neue text-3xl md:text-5xl lg:text-6xl xl:text-7xl"/></div>
-        <div className='py-3'>
-        <MaskText
-              text="Description"
-              className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
-            />
-              <MaskText
-              text="The Young Canada Professionals (YCP) Program allows young professionals to gain work experience in Canada, boosting career development and skills"
-              className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
-            />
-        </div>
-        <div className='py-3'>
-        <MaskText
-              text="Eligibility"
-              className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
-            />
-              <MaskText
-              text="Applicants must meet age, language, and education requirements, as well as have a job offer in Canada"
-              className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
-            />
-        </div>
-        <div className='py-3' >
-        <MaskText
-              text="BENEFITS"
-              className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
-            />
-              <MaskText
-              text="Work experience in Canada with potential for future immigration pathways"
-              className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
-            />
-        </div>
-        <div className='py-3' >
-        <MaskText
-              text="DURATION"
-              className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
-            />
-              <MaskText
-              text="Varies; typically a temporary work permit"
-              className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
-            />
-        </div>
-
-        </div>
 
 <Endling/>
 <FaqList/>

@@ -1,14 +1,25 @@
 "use client"; // Ensure this is a client-side component
 import { motion, useScroll, useTransform } from "framer-motion";
-import Lottie from "lottie-react";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 import TextReveal from "./TextReveal";
-import animationData from "../json/scrolling-animation.json";
+
+// Dynamically import Lottie to prevent SSR issues
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 const HeroSection = () => {
   const { scrollY } = useScroll();
-  
+  const [animationData, setAnimationData] = useState(null);
+
   // Y-axis transform on scroll for the .ok div
   const yTransform = useTransform(scrollY, [0, 800], [0, 400]);
+
+  useEffect(() => {
+    // Import animation data only on client-side
+    import("../json/scrolling-animation.json").then((data) => {
+      setAnimationData(data);
+    });
+  }, []);
 
   return (
     <motion.div
@@ -41,12 +52,14 @@ const HeroSection = () => {
 
       {/* Lottie Animation Container */}
       <div className="lottie absolute bottom-10 left-1/2 transform -translate-x-1/2 flex justify-center items-center">
-        <Lottie
-          animationData={animationData}  // JSON path for the animation
-          className="w-15 h-auto max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg"
-          loop
-          autoplay
-        />
+        {animationData && (
+          <Lottie
+            animationData={animationData}  // JSON path for the animation
+            className="w-15 h-auto max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg"
+            loop
+            autoplay
+          />
+        )}
       </div>
     </motion.div>
   );

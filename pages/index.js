@@ -23,6 +23,7 @@ const OutroComponent = dynamic(() => import('../components/OutroComponent'), {
   ssr: false,
   loading: () => <img src="/assets/placeholder.png" />
 });
+
 const FaqList = dynamic(() => import('../components/FaqList'), {
   ssr: false,
   loading: () => <img src="/assets/placeholder.png" />
@@ -36,7 +37,7 @@ export default function Home() {
   <meta name="description" content="Navigate your immigration journey with URGE OF IMMIGRATION. We specialize in visa consultation for study, work, and residency options worldwide. Your dreams, our guidance." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </Head>
-      
+
       <Navbar />
       <HeroSection />
       <BriefcaseSection />

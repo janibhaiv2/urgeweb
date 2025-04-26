@@ -86,6 +86,13 @@ const Privacy = () => {
               text="Once payment is successfully completed, all customers will receive a payment confirmation receipt by email and to the email address entered by the customer on the online payment form. The payment confirmation will be received immediately by email on successful completion of payment."
               className="text-pri-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
             />
+            <div className='py-3'>
+              <MaskText
+              text="(NOTE) URGE OF IMMIGRATION Company shall not be held liable for any payments made to personal bank accounts or any account other than the company’s officially designated bank account. Clients are strictly advised to ensure that all transactions are processed exclusively through URGE OF IMMIGRATION Company’s verified banking details. Any deviation from this may result in financial loss, for which the company bears no responsibility whatsoever."
+              className="text-red-900 font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+            </div>
+
         </div>
         </div>
 

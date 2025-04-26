@@ -37,8 +37,8 @@ function Footer() {
           </div>
           <div className="uppercase font-pp-neue text-sec-clr text-1xl flex items-start justify-center ">
             <TextReveal
-              linkText="+971 58 888 8932"
-              linkHref="tel:+971588888932"
+              linkText="+971 50 484 5469"
+              linkHref="tel:+971504845469"
               tag="div"
             />
           </div>
@@ -79,7 +79,7 @@ function Footer() {
           </div>
           <div className="uppercase font-pp-neue text-sec-clr text-1xl flex items-start justify-center"style={{ lineHeight: "100%" }}>
             <TextReveal
-              text="Atrium Center - Khalid bin Al Waleed Street - 206 and 207 office 10, 2nd floor - DUBAI"
+              text="Atrium Center - Khalid bin Al Waleed Street - 206 and 207, 2nd floor - DUBAI"
               tag="div"
             />
           </div>
@@ -100,7 +100,7 @@ function Footer() {
           </div>
           <div className="uppercase font-pp-neue text-sec-clr text-1xl md:text-3xl lg:text-5xl whitespace-nowrap flex items-start justify-center">
             <TextReveal
-              text="2024. ALL RIGHTS RESERVED"
+              text="2025. ALL RIGHTS RESERVED"
               tag="div"
               duration={1}
               delay={0.1}

@@ -97,7 +97,11 @@ const Testimonials = () => {
       setDragConstraints({ left: maxDrag, right: 0 });
     }
 
+    // Create a more robust ScrollTrigger that works with other components
     if (testimonialRef.current) {
+      // Clear any existing ScrollTriggers to prevent conflicts
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+
       gsap.fromTo(
         testimonialRef.current,
         { x: 200 },
@@ -108,25 +112,34 @@ const Testimonials = () => {
             start: "top bottom",
             end: "bottom top",
             scrub: true,
+            id: "testimonials-scroll", // Add ID for easier debugging
+            onEnter: () => console.log("Testimonials animation entered"),
+            onLeave: () => console.log("Testimonials animation left"),
           },
         }
       );
     }
+
+    // Cleanup function
+    return () => {
+      // Kill only this specific ScrollTrigger on unmount
+      ScrollTrigger.getById("testimonials-scroll")?.kill();
+    };
   }, [isClient]);
 
   if (!isClient) return null;
 
   return (
-    <div className="jolo min-h-auto bg-pri-clr w-screen flex justify-center items-center flex-col py-10">
+    <div className="jolo min-h-auto bg-pri-clr w-screen flex justify-center items-center flex-col py-10" style={{ position: 'relative', zIndex: 2 }}>
       <div className="w-full overflow-hidden mb-10 px-5">
-      
+
         <MaskText
             text="What Our"
             className="text-pri-light-clr font-pp-neue text-4xl uppercase leading-[90%] md:text-8xl"/>
         <MaskText
             text="Clients Say?"
             className="text-pri-light-clr font-pp-neue text-4xl uppercase leading-[90%] mb-4 md:text-8xl"/>
-        
+
         {/* Drag container */}
         <motion.div
           ref={containerRef}

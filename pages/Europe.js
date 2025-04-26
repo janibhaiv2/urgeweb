@@ -58,10 +58,10 @@ const EuropeVisaPrograms = () => {
 
         <div className='h-auto w-screen bg-pri-clr py-10 px-5'>
         <div className='mb-3'> <MaskText 
-              text="FINLAND"
+              text="LUXEMBOURG"
               className="text-sec-clr uppercase font-pp-neue text-3xl md:text-5xl lg:text-6xl xl:text-7xl"/></div>
                  <div className='mb-3'> <MaskText 
-              text="*FINLAND STARTUP PERMIT*"
+              text="*LUXEMBOURG WORK VISA*"
               className="text-logo-clr uppercase font-pp-neue text-1xl md:text-6xl lg:text-5xl xl:text-4xl"/></div>
         <div className='py-3'>
         <MaskText
@@ -69,7 +69,7 @@ const EuropeVisaPrograms = () => {
               className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
             />
               <MaskText
-              text="The Finland Startup Permit is designed for innovative entrepreneurs who wish to establish a startup in Finland. This permit helps startups establish a business with international growth potential in Finland"
+              text="The Luxembourg Work Visa is designed for non-EU nationals who wish to work in Luxembourg. It allows skilled professionals to reside and work in one of Europe's most dynamic economies, subject to a valid job offer and a work permit approval"
               className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
             />
         </div>
@@ -79,7 +79,7 @@ const EuropeVisaPrograms = () => {
               className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
             />
               <MaskText
-              text="Applicants must have an innovative business plan, sufficient financial resources, and an intent to establish a startup in Finland"
+              text="Must have a confirmed job offer from a Luxembourg-based employer and meet the required qualifications, experience, and salary criteria set by the Luxembourg authorities"
               className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
             />
         </div>
@@ -89,7 +89,7 @@ const EuropeVisaPrograms = () => {
               className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
             />
               <MaskText
-              text="Enables entrepreneurs to live and work in Finland with a pathway to permanent residency"
+              text="Must have a confirmed job offer from a Luxembourg-based employer and meet the required qualifications, experience, and salary criteria set by the Luxembourg authorities"
               className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
             />
         </div>
@@ -99,7 +99,7 @@ const EuropeVisaPrograms = () => {
               className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
             />
               <MaskText
-              text="Initially valid for 2 years, with options for renewal and permanent residency"
+              text="Initially valid for up to 1 year, renewable annually, and may lead to eligibility for long-term residence after five years of continuous stay"
               className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
             />
         </div>
@@ -107,7 +107,7 @@ const EuropeVisaPrograms = () => {
         </div>
         <div className='h-auto w-screen bg-pri-clr py-10 px-5'>
         <div className='mb-3'> <MaskText 
-              text="*FINLAND WORK VISA*"
+              text="*LUXEMBOURG VISIT VISA*"
               className="text-logo-clr uppercase font-pp-neue text-1xl md:text-6xl lg:text-5xl xl:text-4xl"/></div>
         <div className='py-3'>
         <MaskText
@@ -115,7 +115,7 @@ const EuropeVisaPrograms = () => {
               className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
             />
               <MaskText
-              text="The Finland Work Visa allows skilled workers to work for a Finnish employer. This visa is suitable for professionals with job offers in high-demand sectors in Finland"
+              text="The Luxembourg Visit Visa is intended for individuals wishing to travel to Luxembourg for short stays, including tourism, visiting family or friends, or attending business meetings. It allows entry into Luxembourg and other Schengen countries for a limited duration"
               className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
             />
         </div>
@@ -125,7 +125,7 @@ const EuropeVisaPrograms = () => {
               className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
             />
               <MaskText
-              text="Must have a valid job offer from a Finnish employer and meet qualification and language requirements"
+              text="Applicants must provide proof of accommodation, sufficient financial means, travel insurance, and a valid reason for visiting, along with a valid passport and supporting documents"
               className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
             />
         </div>
@@ -135,7 +135,7 @@ const EuropeVisaPrograms = () => {
               className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
             />
               <MaskText
-              text="Provides a pathway to work and reside in Finland, with an option for long-term residency"
+              text="Enables short-term travel across Luxembourg and the Schengen Zone for tourism, family visits, or business purposes, offering exposure to European culture and opportunities"
               className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
             />
         </div>
@@ -145,12 +145,13 @@ const EuropeVisaPrograms = () => {
               className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
             />
               <MaskText
-              text="Typically valid for the duration of the employment contract, with options for renewal"
+              text="Enables short-term travel across Luxembourg and the Schengen Zone for tourism, family visits, or business purposes, offering exposure to European culture and opportunities"
               className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
             />
         </div>
 
         </div>
+   
         <AnimatedLine index={0} />
 
         <div className='h-auto w-screen bg-pri-clr py-10 px-5'>
@@ -636,8 +637,52 @@ const EuropeVisaPrograms = () => {
         </div>
 
         </div>
-        <AnimatedLine index={6} />
+        <div className='h-auto w-screen bg-pri-clr py-10 px-5'>
+        <div className='mb-3'> <MaskText 
+              text="*NETHERLANDS WORK VISA*"
+              className="text-logo-clr uppercase font-pp-neue text-1xl md:text-6xl lg:text-5xl xl:text-4xl"/></div>
+        <div className='py-3'>
+        <MaskText
+              text="Description"
+              className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+              <MaskText
+              text="The Netherlands Work Visa allows non-EU nationals to live and work in the Netherlands by securing employment with a recognized Dutch employer. It supports the country's demand for skilled professionals across various sectors"
+              className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+        </div>
+        <div className='py-3'>
+        <MaskText
+              text="Eligibility"
+              className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+              <MaskText
+              text="Applicants must have a valid job offer from an employer registered with the Dutch Immigration and Naturalisation Service (IND) and meet specific qualifications, salary thresholds, and skill requirements"
+              className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+        </div>
+        <div className='py-3' >
+        <MaskText
+              text="BENEFITS"
+              className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+              <MaskText
+              text="Provides the opportunity to work legally in the Netherlands, access European work experience, enjoy a high quality of life, and eventually apply for permanent residency"
+              className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+        </div>
+        <div className='py-3' >
+        <MaskText
+              text="DURATION"
+              className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+              <MaskText
+              text="Typically valid for up to 1 to 5 years, depending on the type of employment contract, with the possibility to extend or apply for long-term residence"
+              className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+        </div>
 
+        </div>
       
 
 <Endling/>

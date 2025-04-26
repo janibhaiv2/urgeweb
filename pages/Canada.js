@@ -63,6 +63,56 @@ const CanadaVisaPrograms = () => {
 
         <div className='h-auto w-screen bg-pri-clr py-10 px-5'>
         <div className='mb-3'> <MaskText 
+              text="LMIA CANADA PROGRAM"
+              className="text-sec-clr uppercase font-pp-neue text-3xl md:text-5xl lg:text-6xl xl:text-7xl"/></div>
+        <div className='py-3'>
+        <MaskText
+              text="Description"
+              className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+              <MaskText
+              text="The Labour Market Impact Assessment (LMIA) is a document that Canadian employers must obtain before hiring foreign workers. It verifies that there is a need for a foreign worker to fill the job and that no Canadian citizen or permanent resident is available to do so."
+              className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+        </div>
+        <div className='py-3'>
+        <MaskText
+              text="Eligibility"
+              className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+              <MaskText
+              text="Must have a valid job offer from a Canadian employer who has received a positive LMIA approval. The candidate must meet the job's skill, educational, and language requirements as specified"
+              className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+        </div>
+       
+
+        <div className='py-3' >
+        <MaskText
+              text="BENEFITS"
+              className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+              <MaskText
+              text="Facilitates the work permit process and can lead to permanent residency pathways through programs like Express Entry."
+              className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+        </div>
+
+        <div className='py-3' >
+        <MaskText
+              text="Duration"
+              className="text-pri-light-clr font-lauanne text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+              <MaskText
+              text="Typically valid for a limited period (up to 6 months); however, it can lead to long-term employment and eligibility for permanent residency."
+              className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
+            />
+        </div>
+        </div>
+        <AnimatedLine index={0} />
+
+        <div className='h-auto w-screen bg-pri-clr py-10 px-5'>
+        <div className='mb-3'> <MaskText 
               text="AIPP PROGRAM"
               className="text-sec-clr uppercase font-pp-neue text-3xl md:text-5xl lg:text-6xl xl:text-7xl"/></div>
         <div className='py-3'>

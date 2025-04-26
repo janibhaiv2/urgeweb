@@ -107,7 +107,7 @@ const WhyChooseUs = () => {
               className="text-pri-light-clr font-pp-neue text-3xl md:text-5xl lg:text-6xl xl:text-7xl uppercase"
             />
             <MaskText
-              text="With a 94% success rate, we’ve turned dreams into reality for clients worldwide."
+              text="With a 85% to 92% success rate, we’ve turned dreams into reality for clients worldwide."
               className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
             />
           </div>

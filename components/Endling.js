@@ -3,8 +3,12 @@ import Button from './Button';
 import ParallaxImage from './ParallaxImage';
 import { MaskText } from './maskText/MaskText';
 import MyArrowIcon from './MyArrowIcon';
+import { useRouter } from 'next/router';
 
-const Endling = () => {
+const Endling = ({ hideButton }) => {
+  const router = useRouter();
+  // Hide button if hideButton prop is true or if we're on the contact page
+  const shouldHideButton = hideButton || router.pathname === '/contact';
   return (
     <div className="w-screen md:h-screen py-10 px-5 flex items-center justify-center flex-col bg-pri-clr relative">
       {/* Image and Content Section */}
@@ -28,21 +32,23 @@ const Endling = () => {
             className="text-sec-clr font-pp-neue text-base sm:text-lg md:text-2xl lg:text-3xl"
           />
 
-          {/* Animated Button */}
-          <div className="flex items-end py-5">
-            <Button
-              href="/contact"
-              svgIcon={<MyArrowIcon />}
-              textOne="SCHEDULE A CALL"
-              textTwo="SCHEDULE A CALL"
-              wrapperBgColor="bg-sec-clr" // Background color for .btn-wrapper
-              linkTextColor="font-[500] text-pri-clr font-PP-NEUE" // Text color for .btn-link-wrapper span
-              svgWrapperBgColor="bg-pri-clr" // Background color for .btn-svg-wrapper
-            />
-          </div>
+          {/* Animated Button - only shown if not on contact page */}
+          {!shouldHideButton && (
+            <div className="flex items-end py-5">
+              <Button
+                href="/contact"
+                svgIcon={<MyArrowIcon />}
+                textOne="SCHEDULE A CALL"
+                textTwo="SCHEDULE A CALL"
+                wrapperBgColor="bg-sec-clr" // Background color for .btn-wrapper
+                linkTextColor="font-[500] text-pri-clr font-PP-NEUE" // Text color for .btn-link-wrapper span
+                svgWrapperBgColor="bg-pri-clr" // Background color for .btn-svg-wrapper
+              />
+            </div>
+          )}
         </div>
         </div>
-       
+
       </div>
     </div>
   );
