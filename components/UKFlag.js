@@ -64,7 +64,7 @@ extend({ SilkMaterial });
 
 function Wave() {
   const meshRef = useRef();
-  const texture = useTexture('/textures/UK.jpg');
+  const texture = useTexture('/textures/Uk.jpg');
 
   // Animation logic
   useFrame(({ clock }) => {

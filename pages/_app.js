@@ -197,6 +197,9 @@ function MyApp({ Component, pageProps, resetLoading, modelsLoading, modelLoading
           } else if (url.includes('/USA')) {
             pageTitle = 'American Dream Awaits | URGE';
             pageTransitionText = 'LAND OF OPPORTUNITY';
+          } else if (url.includes('/UAE')) {
+            pageTitle = 'Dubai Dreams Await | URGE';
+            pageTransitionText = 'CITY OF GOLD';
           } else if (url.includes('/Canada')) {
             pageTitle = 'True North Strong | URGE';
             pageTransitionText = 'MAPLE COUNTRY';
@@ -212,6 +215,9 @@ function MyApp({ Component, pageProps, resetLoading, modelsLoading, modelLoading
           } else if (url.includes('/Privacy&Policy')) {
             pageTitle = 'Privacy & Policy | URGE';
             pageTransitionText = 'Privacy & Policy';
+          } else if (url.includes('/success_stories')) {
+            pageTitle = 'Success Stories | URGE';
+            pageTransitionText = 'OUR ACHIEVEMENTS';
           } else if (url.includes('/Terms&Conditions')) {
             pageTitle = 'Terms & Conditions | URGE';
             pageTransitionText = 'Terms & Conditions';

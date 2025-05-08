@@ -118,15 +118,15 @@ const Navbar = () => {
               transition={{ duration: 0.2 }}
               style={{ pointerEvents: isHovered ? "auto" : "none" }}
             >
-              <Link scroll={false} href="/USA" className="block px-6 py-2 w-full whitespace-nowrap hover:text-[#3f3f3f] duration-300">
-                USA
+              <Link scroll={false} href="/UAE" className="block px-6 py-2 w-full whitespace-nowrap hover:text-[#3f3f3f] duration-300">
+                UAE
               </Link>
               <Link scroll={false} href="/Canada" className="block px-6 py-2 w-full whitespace-nowrap hover:text-[#3f3f3f] duration-300">
                 CANADA
               </Link>
-              <Link scroll={false} href="/Australia" className="block px-6 py-2 w-full whitespace-nowrap hover:text-[#3f3f3f] duration-300">
+              {/* <Link scroll={false} href="/Australia" className="block px-6 py-2 w-full whitespace-nowrap hover:text-[#3f3f3f] duration-300">
               AUSTRALIA
-              </Link>
+              </Link> */}
               <Link scroll={false} href="/UK" className="block px-6 py-2 w-full whitespace-nowrap hover:text-[#3f3f3f] duration-300">
               UK
               </Link>
@@ -138,6 +138,9 @@ const Navbar = () => {
           <Link scroll={false} href="/contact" className="text-pri-clr">
             CONTACT
           </Link>
+            <Link scroll={false} href="/success_stories" className="text-pri-clr">
+            SUCCESS STORIES 
+            </Link>
         </div>
 
         <div className="hidden md:block text-right">
@@ -205,15 +208,15 @@ const Navbar = () => {
                         transition={{ duration: 0.3 }}
                         style={{ overflow: "hidden" }}
                       >
-                        <Link href="/USA" className="text-4xl text-[#3d3d3d]" onClick={toggleMobileMenu}>
-                        USA
+                        <Link href="/UAE" className="text-4xl text-[#3d3d3d]" onClick={toggleMobileMenu}>
+                        UAE
                         </Link>
                         <Link href="/Canada" className="text-4xl text-[#3d3d3d]" onClick={toggleMobileMenu}>
                           CANADA
                         </Link>
-                        <Link href="/Australia" className="text-4xl text-[#3d3d3d]" onClick={toggleMobileMenu}>
+                        {/* <Link href="/Australia" className="text-4xl text-[#3d3d3d]" onClick={toggleMobileMenu}>
                           AUSTRALIA
-                        </Link>
+                        </Link> */}
                         <Link href="/UK" className="text-4xl text-[#3d3d3d]" onClick={toggleMobileMenu}>
                           UK
                         </Link>
@@ -227,6 +230,10 @@ const Navbar = () => {
 
                 <Link href="/contact" className="text-5xl" onClick={toggleMobileMenu}>
                   CONTACT
+                </Link>
+
+                <Link href="/success_stories" className="text-5xl" onClick={toggleMobileMenu}>
+                  SUCCESS STORIES
                 </Link>
 
                 <div className="h-full flex items-end py-5">

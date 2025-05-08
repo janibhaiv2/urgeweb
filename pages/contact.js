@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useState, createContext } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import Button from '../components/Button';
 import MyArrowIcon from '../components/MyArrowIcon';
@@ -10,22 +10,45 @@ import FaqList from '../components/FaqList';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import PhoneInput from '../components/PhoneInput';
+import WhatsAppInput from '../components/WhatsAppInput';
+import CountrySelect from '../components/CountrySelect';
+import CustomSelect from '../components/CustomSelect';
+
+// Create a context to track the active dropdown
+export const DropdownContext = createContext();
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
+    whatsapp: '',
+    nationality: '',
+    currentCountry: '',
     migrateCountry: '',
     age: '',
+    currentOccupation: '',
     education: '',
     immigrationType: '',
   });
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
+  const [activeDropdown, setActiveDropdown] = useState(null);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // If changing the country, reset the immigration type
+    if (name === 'migrateCountry') {
+      setFormData({
+        ...formData,
+        [name]: value,
+        immigrationType: ''
+      });
+      return;
+    }
+
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
@@ -47,38 +70,64 @@ export default function ContactForm() {
       return;
     }
 
+    // Validate WhatsApp number has country code and proper format
+    if (!formData.whatsapp.startsWith('+') || formData.whatsapp.length < 8) {
+      setPopupMessage("Please enter a valid WhatsApp number with country code");
+      setPopupVisible(true);
+      setTimeout(() => setPopupVisible(false), 2000);
+      return;
+    }
+
     try {
-      // Format data for Supabase with proper column names
+      // Format data for Supabase with proper column names for urgecontact project
       const submissionData = {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
-        // Use quoted column names for camelCase properties
+        whatsapp: formData.whatsapp,
+        nationality: formData.nationality,
+        "currentCountry": formData.currentCountry,
         "migrateCountry": formData.migrateCountry,
         "age": formData.age,
+        "currentOccupation": formData.currentOccupation,
         education: formData.education,
         "immigrationType": formData.immigrationType,
         created_at: new Date().toISOString()
       };
 
-      console.log('Submitting data:', submissionData);
+      console.log('Submitting data to urgecontact Supabase project:', submissionData);
 
-      // Insert data into Supabase
+      // Log Supabase URL and key (without showing the full key for security)
+      console.log('Supabase URL:', supabase.supabaseUrl);
+      console.log('Using Supabase key (first 10 chars):', supabase.supabaseKey.substring(0, 10) + '...');
+
+      // Insert data into Supabase contacts table
       const { error } = await supabase
         .from('contacts')
         .insert([submissionData]);
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
 
+      console.log('Form data successfully inserted into Supabase contacts table');
+
+      console.log('Form submitted successfully to urgecontact project');
       setPopupMessage("Form submitted successfully!");
       setPopupVisible(true);
 
+      // Reset form after successful submission
       setFormData({
         name: '',
         email: '',
         phone: '',
+        whatsapp: '',
+        nationality: '',
+        currentCountry: '',
         migrateCountry: '',
         age: '',
+        currentOccupation: '',
         education: '',
         immigrationType: '',
       });
@@ -106,7 +155,8 @@ export default function ContactForm() {
       <div className='w-screen h-10 bg-pri-clr'>
       </div>
       <div className="flex items-center justify-center w-screen">
-        <form onSubmit={handleSubmit} className="w-full bg-pri-clr py-10 px-5">
+        <DropdownContext.Provider value={{ activeDropdown, setActiveDropdown }}>
+          <form onSubmit={handleSubmit} className="w-full bg-pri-clr py-10 px-5">
           <div className="py-10">
             <MaskText
               text="LET'S TALK"
@@ -125,15 +175,11 @@ export default function ContactForm() {
             required
           />
 
-          <label><MaskText text="Migrate Country*" className="text-sec-clr uppercase font-lauanne text-1xl" /></label>
-          <select name="migrateCountry" value={formData.migrateCountry} onChange={handleChange} required className="w-full flex items-center justify-center px-4 py-3 mb-4 rounded font-lauanne uppercase bg-[#1d1d1d] text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent">
-            <option value="" disabled>Select Country</option>
-            <option value="USA">USA</option>
-            <option value="Canada">Canada</option>
-            <option value="Australia">Australia</option>
-            <option value="UK">UK</option>
-            <option value="Germany">Germany</option>
-          </select>
+          <WhatsAppInput
+            value={formData.whatsapp}
+            onChange={handleChange}
+            required
+          />
 
           <label><MaskText text="Age* (Minimum 20 years)" className="text-sec-clr uppercase font-lauanne text-1xl" /></label>
           <input
@@ -146,25 +192,127 @@ export default function ContactForm() {
             className="w-full px-4 py-2 mb-4 rounded font-lauanne bg-[#1d1d1d] text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent"
           />
 
-          <label><MaskText text="Education*" className="text-sec-clr uppercase font-lauanne text-1xl" /></label>
-          <select name="education" value={formData.education} onChange={handleChange} required className="w-full flex items-center justify-center px-4 py-3 mb-4 rounded font-lauanne uppercase bg-[#1d1d1d] text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent">
-            <option value="" disabled>Select Education</option>
-            <option value="High school">High school</option>
-            <option value="Bachelor's Degree">Bachelor's Degree</option>
-            <option value="Master's Degree">Master's Degree</option>
-            <option value="PhD">PhD</option>
-            <option value="Others">Others</option>
-          </select>
+          <CustomSelect
+            label="EDUCATION*"
+            name="education"
+            value={formData.education}
+            onChange={handleChange}
+            options={[
+              { value: "", label: "Select Education", disabled: true },
+              { value: "High school", label: "High school" },
+              { value: "Bachelor's Degree", label: "Bachelor's Degree" },
+              { value: "Master's Degree", label: "Master's Degree" },
+              { value: "PhD", label: "PhD" },
+              { value: "Others", label: "Others" }
+            ]}
+            required
+          />
 
-          <label><MaskText text="Immigration Type*" className="text-sec-clr uppercase font-lauanne text-1xl" /></label>
-          <select name="immigrationType" value={formData.immigrationType} onChange={handleChange} required className="w-full flex items-center justify-center px-4 py-3 mb-4 rounded font-lauanne uppercase bg-[#1d1d1d] text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent">
-            <option value="" disabled>Select Immigration Type</option>
-            <option value="Canada skilled immigration">Canada skilled immigration</option>
-            <option value="Australia skilled immigration">Australia skilled immigration</option>
-            <option value="Visit Visa">Visit Visa</option>
-            <option value="Work Permit">Work Permit</option>
-          </select>
+          <label><MaskText text="Current Occupation*" className="text-sec-clr uppercase font-lauanne text-1xl" /></label>
+          <input
+            type="text"
+            name="currentOccupation"
+            value={formData.currentOccupation}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 mb-4 rounded font-lauanne bg-[#1d1d1d] text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent"
+          />
 
+          <CountrySelect
+            label="NATIONALITY*"
+            name="nationality"
+            value={formData.nationality}
+            onChange={handleChange}
+            required
+          />
+
+          <CountrySelect
+            label="CURRENT COUNTRY*"
+            name="currentCountry"
+            value={formData.currentCountry}
+            onChange={handleChange}
+            required
+          />
+
+          <CustomSelect
+            label="MIGRATE COUNTRY*"
+            name="migrateCountry"
+            value={formData.migrateCountry}
+            onChange={handleChange}
+            options={[
+              { value: "", label: "Select Country", disabled: true },
+              { value: "Canada", label: "Canada" },
+              { value: "UAE/Dubai", label: "UAE/Dubai" },
+              { value: "UK", label: "UK" },
+              { value: "LUXEMBOURG", label: "LUXEMBOURG" },
+              { value: "GERMANY", label: "GERMANY" },
+              { value: "PORTUGAL", label: "PORTUGAL" },
+              { value: "MALTA", label: "MALTA" },
+              { value: "POLAND", label: "POLAND" },
+              { value: "NETHERLANDS", label: "NETHERLANDS" },
+
+            ]}
+            required
+          />
+
+          <CustomSelect
+            label="IMMIGRATION TYPE*"
+            name="immigrationType"
+            value={formData.immigrationType}
+            onChange={handleChange}
+            options={[
+              { value: "", label: "Select Immigration Type", disabled: true },
+              ...(formData.migrateCountry === 'Canada' ? [
+                { value: "LMIA Canada Program", label: "LMIA Canada Program" },
+                { value: "AIPP Program", label: "AIPP Program" },
+                { value: "SINP", label: "SINP (Saskatchewan)" },
+                { value: "Canada Business Visa", label: "Canada Business Visa" },
+                { value: "Canada Spouse Visa", label: "Canada Spouse Visa" },
+                { value: "Canada Work Permit", label: "Canada Work Permit" },
+                { value: "Express Entry", label: "Express Entry" },
+                { value: "PNP Canada", label: "PNP Canada" },
+                { value: "YCP Program", label: "YCP Program" }
+
+              ] : formData.migrateCountry === 'UAE/Dubai' ? [
+                { value: "Dubai Freelance Visa", label: "Dubai Freelance Visa" },
+                { value: "UAE Visit Visa", label: "UAE Visit Visa" }
+              ]
+
+               : formData.migrateCountry === 'UK' ? [
+                { value: "UK COS Program", label: "UK COS Program" },
+                { value: "UK Innovator Visa", label: "UK Innovator Visa" },
+                { value: "UK Sole Representative", label: "UK Sole Representative" },
+                { value: "UK Startup Visa", label: "UK Startup Visa" },
+                { value: "UK Study Visa", label: "UK Study Visa" },
+                { value: "UK Visit Visa", label: "UK Visit Visa" }
+              ] : formData.migrateCountry === 'LUXEMBOURG' ? [
+                { value: "Luxembourg Work Visa", label: "Luxembourg Work Visa" },
+                { value: "Luxembourg Visit Visa", label: "Luxembourg Visit Visa" }
+              ] : formData.migrateCountry === 'GERMANY' ? [
+                { value: " Germany Job Seeker", label: " Germany Job Seeker" },
+                { value: "Germany Blue Card", label: "Germany Blue Card" }
+              ] : formData.migrateCountry === 'PORTUGAL' ? [
+                { value: "Portugal Golden Visa", label: "Portugal Golden Visa" },
+                { value: "PORTUGAL D7 VISA", label: "PORTUGAL D7 VISA" }
+              ] : formData.migrateCountry === 'MALTA' ? [
+                { value: "Malta Global Residence", label: "Malta Global Residence" },
+                { value: "Malta Work Visa", label: "Malta Work Visa" }
+              ] : formData.migrateCountry === 'POLAND' ? [
+                { value: "Poland Business Visa", label: "Poland Business Visa" },
+                { value: "Poland Work Permit", label: "Poland Work Permit" }
+              ] : formData.migrateCountry === 'NETHERLANDS' ? [
+                { value: "Netherlands Startup Visa", label: "Netherlands Startup Visa" },
+                { value: "Netherlands Highly Skilled Migrant Visa", label: "Netherlands Highly Skilled Migrant Visa" },
+                { value: "Netherlands Work Visa", label: "Netherlands Work Visa" }
+              ] : [
+                { value: "Visit Visa", label: "Visit Visa" },
+                { value: "Work Permit", label: "Work Permit" },
+                { value: "Business Visa", label: "Business Visa" },
+                { value: "Student Visa", label: "Student Visa" }
+              ])
+            ]}
+            required
+          />
 
 
           <div className="mt-6">
@@ -182,7 +330,8 @@ export default function ContactForm() {
           {popupVisible && (
             <div className="popup font-pp-neue">{popupMessage}</div>
           )}
-        </form>
+          </form>
+        </DropdownContext.Provider>
 
         <style jsx>{`
           .popup {

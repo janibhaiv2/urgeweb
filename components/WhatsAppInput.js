@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useContext } from 'react';
 import { MaskText } from './maskText/MaskText';
 import { DropdownContext } from '../pages/contact';
 
-// Country codes with their respective formats
+// Country codes with their respective formats - same as PhoneInput
 // FORMAT GUIDE:
 // - 'code': Country calling code with + sign (e.g., '+91')
 // - 'country': Country name displayed in dropdown
@@ -107,7 +107,7 @@ const countryCodes = [
   { code: '+598', country: 'Uruguay', format: 'X XXX XXXX', placeholder: '9 123 4567', maxLength: 11 },
 ];
 
-export default function PhoneInput({ value, onChange, required }) {
+export default function WhatsAppInput({ value, onChange, required }) {
   const [selectedCountry, setSelectedCountry] = useState(countryCodes[0]);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
@@ -176,7 +176,7 @@ export default function PhoneInput({ value, onChange, required }) {
     // Call the parent onChange with the new value
     onChange({
       target: {
-        name: 'phone',
+        name: 'whatsapp',
         value: country.code + ' '
       }
     });
@@ -211,7 +211,7 @@ export default function PhoneInput({ value, onChange, required }) {
       // This combines the country code with the formatted number
       onChange({
         target: {
-          name: 'phone',
+          name: 'whatsapp',
           value: selectedCountry.code + ' ' + formatted
         }
       });
@@ -286,7 +286,7 @@ export default function PhoneInput({ value, onChange, required }) {
 
   // Close this dropdown if another one is opened
   useEffect(() => {
-    if (activeDropdown && activeDropdown !== 'phone' && dropdownOpen) {
+    if (activeDropdown && activeDropdown !== 'whatsapp' && dropdownOpen) {
       setDropdownOpen(false);
       setSearchTerm('');
     }
@@ -324,7 +324,7 @@ export default function PhoneInput({ value, onChange, required }) {
 
   return (
     <div>
-      <label><MaskText text="PHONE NUMBER*" className="text-sec-clr font-lauanne text-1xl" /></label>
+      <label><MaskText text="WHATSAPP NUMBER*" className="text-sec-clr font-lauanne text-1xl" /></label>
       <div className="flex flex-col md:flex-row gap-2 mb-2">
         {/* Country code selector with dropdown */}
         <div className="relative w-full md:w-1/3 country-dropdown-container">
@@ -337,13 +337,13 @@ export default function PhoneInput({ value, onChange, required }) {
                 setActiveDropdown(null);
               } else {
                 // If another dropdown is open, close it first
-                if (activeDropdown && activeDropdown !== 'phone') {
+                if (activeDropdown && activeDropdown !== 'whatsapp') {
                   // This will trigger the useEffect in the other dropdown
-                  setActiveDropdown('phone');
+                  setActiveDropdown('whatsapp');
                 }
                 // Open this dropdown
                 setDropdownOpen(true);
-                setActiveDropdown('phone');
+                setActiveDropdown('whatsapp');
               }
             }}
           >
