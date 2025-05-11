@@ -51,8 +51,7 @@ function Footer() {
             />
           </div>
 
-          <div className="uppercase font-pp-neue text-sec-clr text-1xl flex items-start justify-center space-x-2 pt-2">
-  {/* Facebook with hover color */}
+          {/* <div className="uppercase font-pp-neue text-sec-clr text-1xl flex items-start justify-center space-x-2 pt-2">
   <div className="hover:text-[#1877F2] transition-colors duration-300">
     <TextReveal linkHref="https://www.facebook.com/people/Urge-Of-Immigration-Visa-Services/61561331173529/" iconName="facebook"
              duration={1}
@@ -62,14 +61,13 @@ function Footer() {
 
  
 
-  {/* Instagram with hover color */}
   <div className="hover:text-[#E4405F] transition-colors duration-300">
     <TextReveal linkHref="https://www.instagram.com/urgeofimmigration_visa/" iconName="instagram"
              duration={1.3}
                     delay={0.1}
                      yAxis="150%" />
   </div>
-</div>
+</div> */}
 
         </div>
 {/* LOCATION  */}

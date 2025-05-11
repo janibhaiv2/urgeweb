@@ -138,15 +138,15 @@ const Navbar = () => {
           <Link scroll={false} href="/contact" className="text-pri-clr">
             CONTACT
           </Link>
-            <Link scroll={false} href="/success_stories" className="text-pri-clr">
+            {/* <Link scroll={false} href="/success_stories" className="text-pri-clr">
             SUCCESS STORIES 
-            </Link>
+            </Link> */}
         </div>
 
         <div className="hidden md:block text-right">
           <div className="h-full flex items-end py-5 whitespace-nowrap justify-end">
           <Button
-        href="https://business.mamopay.com/pay/urgeofimmigrationvis-1c73a8"
+        href="https://business.mamopay.com/pay/urgeofimmigrationvis-243386"
         svgIcon={<PaymentIcon />}
         textOne="INSTANT PAYMENT"
         textTwo="INSTANT PAYMENT"
@@ -232,13 +232,13 @@ const Navbar = () => {
                   CONTACT
                 </Link>
 
-                <Link href="/success_stories" className="text-5xl" onClick={toggleMobileMenu}>
+                {/* <Link href="/success_stories" className="text-5xl" onClick={toggleMobileMenu}>
                   SUCCESS STORIES
-                </Link>
+                </Link> */}
 
                 <div className="h-full flex items-end py-5">
                 <Button
-        href="https://business.mamopay.com/pay/urgeofimmigrationvis-1c73a8"
+        href="https://business.mamopay.com/pay/urgeofimmigrationvis-243386"
         svgIcon={<PaymentIcon />}
         textOne="INSTANT PAYMENT"
         textTwo="INSTANT PAYMENT"
