@@ -190,13 +190,13 @@ export default function ContactForm() {
             required
           />
 
-          <label><MaskText text="Age* (Minimum 20 years)" className="text-sec-clr uppercase font-lauanne text-1xl" /></label>
+          <label><MaskText text="Age* (Minimum 22 years)" className="text-sec-clr uppercase font-lauanne text-1xl" /></label>
           <input
             type="number"
             name="age"
             value={formData.age}
             onChange={handleChange}
-            min="20"
+            min="22"
             required
             className="w-full px-4 py-2 mb-4 rounded font-lauanne bg-[#1d1d1d] text-sec-clr focus:outline-none focus:ring-2 focus:ring-transparent"
           />
