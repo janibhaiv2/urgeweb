@@ -54,9 +54,9 @@ export default function ContactForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate age is at least 20
-    if (parseInt(formData.age) < 20) {
-      setPopupMessage("Age must be at least 20 years.");
+    // Validate age is at least 22
+    if (parseInt(formData.age) < 22) {
+      setPopupMessage("Age must be at least 22 years.");
       setPopupVisible(true);
       setTimeout(() => setPopupVisible(false), 2000);
       return;
@@ -116,6 +116,15 @@ export default function ContactForm() {
       console.log('Form submitted successfully to urgecontact project');
       setPopupMessage("Form submitted successfully!");
       setPopupVisible(true);
+
+      // Add Meta Pixel conversion tracking
+      if (typeof window !== 'undefined' && window.fbq) {
+        window.fbq('track', 'Lead', {
+          content_name: 'Contact Form Submission',
+          content_category: formData.immigrationType || 'General Inquiry',
+          country: formData.migrateCountry || 'Not Specified'
+        });
+      }
 
       // Reset form after successful submission
       setFormData({
