@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import Button from '../components/Button';
 import MyArrowIcon from '../components/MyArrowIcon';
@@ -34,6 +34,20 @@ export default function ContactForm() {
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
   const [activeDropdown, setActiveDropdown] = useState(null);
+
+  // Fire a test event when the contact page loads
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.fbq) {
+      // Test event to verify pixel is working
+      window.fbq('trackCustom', 'ContactPageView', {
+        timestamp: new Date().toISOString(),
+        test_event_code: 'TEST12345' // Add your test event code if you have one
+      });
+      console.log("Contact page view tracked with Meta Pixel");
+    } else {
+      console.warn("Meta Pixel (fbq) not available on contact page load");
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -117,13 +131,34 @@ export default function ContactForm() {
       setPopupMessage("Form submitted successfully!");
       setPopupVisible(true);
 
-      // Add Meta Pixel conversion tracking
-      if (typeof window !== 'undefined' && window.fbq) {
-        window.fbq('track', 'Lead', {
-          content_name: 'Contact Form Submission',
-          content_category: formData.immigrationType || 'General Inquiry',
-          country: formData.migrateCountry || 'Not Specified'
-        });
+      // Add Meta Pixel conversion tracking with enhanced debugging
+      if (typeof window !== 'undefined') {
+        if (window.fbq) {
+          console.log("Tracking Lead event with Meta Pixel...");
+
+          // Track standard Lead event
+          window.fbq('track', 'Lead', {
+            content_name: 'Contact Form Submission',
+            content_category: formData.immigrationType || 'General Inquiry',
+            country: formData.migrateCountry || 'Not Specified',
+            value: 1.00,
+            currency: 'USD',
+            status: 'submitted'
+          });
+
+          // Also track a custom event for redundancy
+          window.fbq('trackCustom', 'FormSubmitted', {
+            form_name: 'Contact Form',
+            form_type: 'Lead Generation',
+            user_email_domain: formData.email.split('@')[1] || 'unknown',
+            nationality: formData.nationality,
+            target_country: formData.migrateCountry
+          });
+
+          console.log("Meta Pixel events triggered successfully");
+        } else {
+          console.error("Meta Pixel fbq function not found. Check if the pixel code is loaded correctly.");
+        }
       }
 
       // Reset form after successful submission
@@ -324,7 +359,7 @@ export default function ContactForm() {
           />
 
 
-          <div className="mt-6">
+          <div className="mt-6" id="submitButtonContainer">
             <Button
              type="submit"
               svgIcon={<MyArrowIcon />}
@@ -333,8 +368,40 @@ export default function ContactForm() {
               wrapperBgColor="bg-sec-clr"
               linkTextColor="font-[500] text-pri-clr font-pp-neue"
               svgWrapperBgColor="bg-pri-clr"
+              onClick={() => {
+                // Redundant tracking directly on button click
+                if (typeof window !== 'undefined' && window.fbq) {
+                  window.fbq('trackCustom', 'SubmitButtonClicked', {
+                    location: 'contact_form',
+                    timestamp: new Date().toISOString()
+                  });
+                  console.log("Button click tracked with Meta Pixel");
+                }
+              }}
             />
           </div>
+
+          {/* Inline Meta Pixel tracking script */}
+          <script dangerouslySetInnerHTML={{ __html: `
+            // Add click event listener to the submit button for redundant tracking
+            document.addEventListener('DOMContentLoaded', function() {
+              var submitContainer = document.getElementById('submitButtonContainer');
+              if (submitContainer) {
+                var submitButton = submitContainer.querySelector('button') || submitContainer.querySelector('a');
+                if (submitButton) {
+                  submitButton.addEventListener('click', function() {
+                    if (typeof fbq !== 'undefined') {
+                      fbq('trackCustom', 'SubmitButtonClickedInline', {
+                        method: 'inline_script',
+                        timestamp: new Date().toISOString()
+                      });
+                      console.log("Button click tracked with inline script");
+                    }
+                  });
+                }
+              }
+            });
+          `}} />
 
           {popupVisible && (
             <div className="popup font-pp-neue">{popupMessage}</div>

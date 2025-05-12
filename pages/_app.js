@@ -392,8 +392,8 @@ function MyApp({ Component, pageProps, resetLoading, modelsLoading, modelLoading
         <meta property="og:image" content="/images/default-OG.jpg" /> {/* Ensure this image path is correct */}
         <meta property="og:url" content="https://urgeofimmigration.com" />
         <link rel="icon" href="/LOGO.svg" />
-        
-        {/* Meta Pixel Code */}
+
+        {/* Meta Pixel Code with Debug Mode */}
         <script dangerouslySetInnerHTML={{ __html: `
           !function(f,b,e,v,n,t,s)
           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -405,6 +405,13 @@ function MyApp({ Component, pageProps, resetLoading, modelsLoading, modelLoading
           'https://connect.facebook.net/en_US/fbevents.js');
           fbq('init', '998614692466127');
           fbq('track', 'PageView');
+
+          // Enable debug mode - this will log all pixel events to console
+          fbq.disableConfigLoading = true;
+          fbq.allowDuplicatePageViews = true;
+          fbq.disablePushState = true;
+          fbq.getState = function() { return "Enabled with debug"; };
+          console.log("Meta Pixel initialized with ID: 998614692466127");
         `}} />
         <noscript>
           <img height="1" width="1" style={{ display: 'none' }}
