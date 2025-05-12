@@ -133,6 +133,61 @@ function MyApp({ Component, pageProps, resetLoading, modelsLoading, modelLoading
       key: router.asPath
     });
     currentRouteRef.current = router.asPath;
+
+    // Track PageView with Conversions API
+    if (typeof window !== 'undefined') {
+      // Get Facebook Browser ID (fbp) and Click ID (fbc) from cookies if available
+      const getFbp = () => {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.startsWith('_fbp=')) {
+            return cookie.substring(5);
+          }
+        }
+        return null;
+      };
+
+      const getFbc = () => {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.startsWith('_fbc=')) {
+            return cookie.substring(5);
+          }
+        }
+        return null;
+      };
+
+      // Send PageView to Conversions API
+      try {
+        fetch('/api/facebook-pageview', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            pageUrl: window.location.href,
+            pageTitle: document.title,
+            fbp: getFbp(),
+            fbc: getFbc()
+          }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            console.log('PageView sent to Conversions API:', data);
+          } else {
+            console.error('Error sending PageView to Conversions API:', data);
+          }
+        })
+        .catch(error => {
+          console.error('Failed to send PageView to Conversions API:', error);
+        });
+      } catch (error) {
+        console.error('Exception sending PageView to Conversions API:', error);
+      }
+    }
   }, [Component, pageProps, router.asPath]);
 
   // Custom navigation function that delays actual navigation

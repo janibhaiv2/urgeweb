@@ -161,6 +161,31 @@ export default function ContactForm() {
         }
       }
 
+      // Send data to Facebook Conversions API (server-side)
+      try {
+        console.log("Sending data to Facebook Conversions API...");
+        const response = await fetch('/api/facebook-conversions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            eventName: 'Lead',
+            formData: formData
+          }),
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          console.log("Successfully sent to Facebook Conversions API:", result);
+        } else {
+          console.error("Error sending to Facebook Conversions API:", result);
+        }
+      } catch (conversionApiError) {
+        console.error("Failed to send to Facebook Conversions API:", conversionApiError);
+        // Don't throw error to prevent disrupting the form submission flow
+      }
+
       // Reset form after successful submission
       setFormData({
         name: '',
