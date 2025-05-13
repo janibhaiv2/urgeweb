@@ -77,7 +77,7 @@ function Footer() {
           </div>
           <div className="uppercase font-pp-neue text-sec-clr text-1xl flex items-start justify-center"style={{ lineHeight: "100%" }}>
             <TextReveal
-              text="Atrium Center - Khalid bin Al Waleed Street - 206 and 207, 2nd floor - DUBAI"
+              text="Atrium Center -"
               tag="div"
             />
           </div>
