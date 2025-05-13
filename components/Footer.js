@@ -77,7 +77,7 @@ function Footer() {
           </div>
           <div className="uppercase font-pp-neue text-sec-clr text-1xl flex items-start justify-center"style={{ lineHeight: "100%" }}>
             <TextReveal
-              text="Atrium Center -"
+              text="ABN Business Center  Opposite Zabeel Furniture Umm Hurair Rd - Al Karama - Dubai"
               tag="div"
             />
           </div>
