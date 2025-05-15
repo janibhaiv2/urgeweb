@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import Script from 'next/script';
 import { NavigationContext } from '../contexts/NavigationContext';
 import TransitionMaskText from '../components/TransitionMaskText';
 import { ModelLoadingProvider } from '../contexts/ModelLoadingContext';
@@ -134,59 +135,11 @@ function MyApp({ Component, pageProps, resetLoading, modelsLoading, modelLoading
     });
     currentRouteRef.current = router.asPath;
 
-    // Track PageView with Conversions API
-    if (typeof window !== 'undefined') {
-      // Get Facebook Browser ID (fbp) and Click ID (fbc) from cookies if available
-      const getFbp = () => {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-          const cookie = cookies[i].trim();
-          if (cookie.startsWith('_fbp=')) {
-            return cookie.substring(5);
-          }
-        }
-        return null;
-      };
-
-      const getFbc = () => {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-          const cookie = cookies[i].trim();
-          if (cookie.startsWith('_fbc=')) {
-            return cookie.substring(5);
-          }
-        }
-        return null;
-      };
-
-      // Send PageView to Conversions API
-      try {
-        fetch('/api/facebook-pageview', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            pageUrl: window.location.href,
-            pageTitle: document.title,
-            fbp: getFbp(),
-            fbc: getFbc()
-          }),
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            console.log('PageView sent to Conversions API:', data);
-          } else {
-            console.error('Error sending PageView to Conversions API:', data);
-          }
-        })
-        .catch(error => {
-          console.error('Failed to send PageView to Conversions API:', error);
-        });
-      } catch (error) {
-        console.error('Exception sending PageView to Conversions API:', error);
-      }
+    // Track initial page view in Google Analytics
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('config', 'G-TBH7W7ZE85K', {
+        page_path: router.asPath,
+      });
     }
   }, [Component, pageProps, router.asPath]);
 
@@ -349,6 +302,13 @@ function MyApp({ Component, pageProps, resetLoading, modelsLoading, modelLoading
         document.title = nextPageTitle.current;
       }
 
+      // Track page view in Google Analytics
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('config', 'G-TBH7W7ZE85K', {
+          page_path: url,
+        });
+      }
+
       // Mark the page as loaded
       loadingState.current.pageLoaded = true;
 
@@ -440,6 +400,25 @@ function MyApp({ Component, pageProps, resetLoading, modelsLoading, modelLoading
   return (
     <NavigationContext.Provider value={{ navigateTo, CustomLink }}>
       <>
+      {/* Google Analytics Tag */}
+      <Script
+        strategy="afterInteractive"
+        src="https://www.googletagmanager.com/gtag/js?id=G-TBH7W7ZE85K"
+      />
+
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-TBH7W7ZE85K');
+          `,
+        }}
+      />
+
       <Head>
         {/* Global Meta Tags */}
         <meta property="og:title" content="URGE OF IMMIGRATION | Trusted Visa Consultancy" />
@@ -448,32 +427,7 @@ function MyApp({ Component, pageProps, resetLoading, modelsLoading, modelLoading
         <meta property="og:url" content="https://urgeofimmigration.com" />
         <link rel="icon" href="/LOGO.svg" />
 
-        {/* Meta Pixel Code with Debug Mode */}
-        <script dangerouslySetInnerHTML={{ __html: `
-          !function(f,b,e,v,n,t,s)
-          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-          n.queue=[];t=b.createElement(e);t.async=!0;
-          t.src=v;s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s)}(window, document,'script',
-          'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '998614692466127');
-          fbq('track', 'PageView');
-
-          // Enable debug mode - this will log all pixel events to console
-          fbq.disableConfigLoading = true;
-          fbq.allowDuplicatePageViews = true;
-          fbq.disablePushState = true;
-          fbq.getState = function() { return "Enabled with debug"; };
-          console.log("Meta Pixel initialized with ID: 998614692466127");
-        `}} />
-        <noscript>
-          <img height="1" width="1" style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=998614692466127&ev=PageView&noscript=1"
-          />
-        </noscript>
-        {/* End Meta Pixel Code */}
+        {/* Meta tags end */}
       </Head>
 
       {/* Preloader with Lottie animation - only shown on initial load */}
