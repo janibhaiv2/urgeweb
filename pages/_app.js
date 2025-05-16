@@ -137,7 +137,7 @@ function MyApp({ Component, pageProps, resetLoading, modelsLoading, modelLoading
 
     // Track initial page view in Google Analytics
     if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('config', 'G-TBH7W7ZE85K', {
+      window.gtag('config', 'G-TBHW7ZE05K', {
         page_path: router.asPath,
       });
     }
@@ -304,7 +304,7 @@ function MyApp({ Component, pageProps, resetLoading, modelsLoading, modelLoading
 
       // Track page view in Google Analytics
       if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('config', 'G-TBH7W7ZE85K', {
+        window.gtag('config', 'G-TBHW7ZE05K', {
           page_path: url,
         });
       }
@@ -403,7 +403,7 @@ function MyApp({ Component, pageProps, resetLoading, modelsLoading, modelLoading
       {/* Google Analytics Tag */}
       <Script
         strategy="afterInteractive"
-        src="https://www.googletagmanager.com/gtag/js?id=G-TBH7W7ZE85K"
+        src="https://www.googletagmanager.com/gtag/js?id=G-TBHW7ZE05K"
       />
 
       <Script
@@ -414,7 +414,7 @@ function MyApp({ Component, pageProps, resetLoading, modelsLoading, modelLoading
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-TBH7W7ZE85K');
+            gtag('config', 'G-TBHW7ZE05K');
           `,
         }}
       />
